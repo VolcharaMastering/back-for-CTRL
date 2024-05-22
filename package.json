@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Test backend",
   "main": "index.js",
+  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "format": "prettier --write **/*.{js,jsx,scss,css,json}"
   },
   "keywords": [],
   "author": "",
