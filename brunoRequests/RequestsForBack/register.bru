@@ -1,0 +1,19 @@
+meta {
+  name: register
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/register/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "mail@mi11.com",
+    "password": "PaSsWoRds",
+    "name": "verWolf"
+  }
+}
