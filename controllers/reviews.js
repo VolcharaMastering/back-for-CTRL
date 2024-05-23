@@ -7,8 +7,8 @@ import Review from "../models/Review.js";
 import { OK_CODE, CODE_CREATED } from "../states/states.js";
 
 const getReviewsByPlaceId = async (req, res, next) => {
+  const { placeId } = req.params;
   try {
-    const { placeId } = req.params;
     const reviews = await Review.find({ placeId });
     if (!reviews) {
       next(NotFound("No such reviews"));
@@ -22,7 +22,7 @@ const getReviewsByPlaceId = async (req, res, next) => {
 
 const createReviewForPlace = async (req, res, next) => {
   const { placeId } = req.params;
-  const { userId } = req.body;
+  const { userId } = req.user._id;
   try {
     const review = await Review.create({ ...req.body, placeId, userId });
     if (!review) {
@@ -37,7 +37,7 @@ const createReviewForPlace = async (req, res, next) => {
 
 const updateReview = async (req, res, next) => {
   const { reviewId } = req.params;
-  const { userId } = req.body;
+  const { userId } = req.user._id;
   try {
     const review = await Review.findById(reviewId);
     if (!review) {
@@ -61,7 +61,7 @@ const updateReview = async (req, res, next) => {
 
 const deleteReview = async (req, res, next) => {
   const { reviewId } = req.params;
-  const { userId } = req.body;
+  const { userId } = req.user._id;
   try {
     const review = await Review.findById(reviewId);
     if (!review) {
@@ -80,9 +80,9 @@ const deleteReview = async (req, res, next) => {
 };
 
 const searchReviews = async (req, res, next) => {
-  const { placeId } = req.params;
+  const { keyword } = req.query;
   try {
-    const review = await Review.findOne({ placeId });
+    const review = await Review.findOne({ keyword });
     if (!review) {
       next(NotFound("No such review"));
       return;
@@ -96,11 +96,20 @@ const searchReviews = async (req, res, next) => {
 const sortReviews = async (req, res, next) => {
   const { sortBy } = req.query;
   try {
-    const reviews = await Review.find({}).sort({ [sortBy]: 1 });
-    if (!reviews) {
-      next(NotFound("No such review"));
+    let sortField;
+    if (sortBy === "rating" || sortBy === "date") {
+      sortField = { [sortBy]: 1 };
+    } else {
+      next(BadRequest("Invalid sortBy parameter"));
       return;
     }
+
+    const reviews = await Review.find({}).sort(sortField);
+    if (!reviews || reviews.length === 0) {
+      next(NotFound("No reviews found"));
+      return;
+    }
+
     res.status(OK_CODE).send(reviews);
   } catch (e) {
     next(ServerError("Some bugs on server"));

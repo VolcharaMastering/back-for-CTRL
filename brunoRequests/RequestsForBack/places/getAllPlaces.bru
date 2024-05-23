@@ -1,0 +1,15 @@
+meta {
+  name: getAllPlaces
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/places/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjhmZjYzMjhhOTc2NWNhZDM3NjIiLCJpYXQiOjE3MTY1MDA3NDF9.n2OdsGvQIuebnxnOX2OBAxyh8cQCFY037_j2p8RlTs8
+}

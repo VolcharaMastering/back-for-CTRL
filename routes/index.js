@@ -8,7 +8,7 @@ import NotFound from "../errors/notFound.js";
 import auth from "../middlewares/auth.js";
 
 import { updateUser, aboutMe, login, createUser, getUsers } from "../controllers/users.js";
-import { validatePlace, getPlaces, deletePlace, searchPlace } from "../controllers/places.js";
+import { addPlace, getPlaces, deletePlace, searchPlace } from "../controllers/places.js";
 import {
   getReviewsByPlaceId,
   createReviewForPlace,
@@ -27,10 +27,10 @@ router.get("/users/me", auth, aboutMe);
 router.patch("/users/me", auth, validateUpdateUser, updateUser);
 
 ///places routes///
-router.post("/places/", auth, validatePlace);
+router.post("/places/", auth, addPlace);
 router.get("/places/", auth, getPlaces);
-router.delete("/places/:Id", auth, deletePlace);
-router.get("/places/search?query=placeNamed", auth, searchPlace);
+router.delete("/places/:id", auth, deletePlace);
+router.get("/places/search", auth, searchPlace);
 ///----------------//////
 
 //places and reviews routes///

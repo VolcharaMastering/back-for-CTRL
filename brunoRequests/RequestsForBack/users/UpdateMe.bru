@@ -1,15 +1,22 @@
 meta {
-  name: GetMe
+  name: UpdateMe
   type: http
-  seq: 5
+  seq: 4
 }
 
-get {
+patch {
   url: http://localhost:3000/users/me/
-  body: none
+  body: json
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjNhMDg1MjgyODQ0NTY2Mzk0ZTcwN2QiLCJpYXQiOjE3MTUwODA3NDl9.yEzDQjeGS84Az2PtMzP_ixx5pRCv4LA-WfBh9xd-x74
+}
+
+body:json {
+  {
+    "email": "miwqel@mi11.com",
+    "name": "veritttWolf"
+  }
 }

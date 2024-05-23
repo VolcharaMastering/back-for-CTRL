@@ -1,0 +1,23 @@
+meta {
+  name: createPlace
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/places/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjhmZjYzMjhhOTc2NWNhZDM3NjIiLCJpYXQiOjE3MTY1MDA3NDF9.n2OdsGvQIuebnxnOX2OBAxyh8cQCFY037_j2p8RlTs8
+}
+
+body:json {
+  {
+    "placeName": "PlacesCool",
+  "latitude": 48.8128,
+  "longitude": -23.007
+  }
+}
