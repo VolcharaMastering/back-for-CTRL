@@ -1,4 +1,12 @@
 import express from "express";
+/**
+ * Express router for handling user, place, and review routes.
+ * Includes middleware functions for error validation, authentication, and handling not found pages.
+ * Imports necessary modules and controllers for user, place, and review operations.
+ *
+ * @module routes
+ */
+
 import {
   validateUpdateUser,
   validateCreateUser,
@@ -15,36 +23,60 @@ import {
   updateReview,
   deleteReview,
   searchReviews,
-  sortReviews
+  sortReviews,
 } from "../controllers/reviews.js";
 
 const router = express.Router();
-////users routes ////////
+/**
+ * Routes for user login, registration, getting all users, getting current user information, updating current user information.
+ * @name POST/login/
+ * @name POST/register/
+ * @name GET/users/
+ * @name GET/users/me
+ * @name PATCH/users/me
+ * @function
+ */
 router.post("/login/", validateLogin, login);
 router.post("/register/", validateCreateUser, createUser);
 router.get("/users/", getUsers);
 router.get("/users/me", auth, aboutMe);
 router.patch("/users/me", auth, validateUpdateUser, updateUser);
 
-///places routes///
+/**
+ * Routes for places create, get all places, delete, find places by keyword
+ * @name POST/places/
+ * @name GET/places//
+ * @name GET//places/search
+ * @name DELETE/places/:id
+ * @function
+ */
 router.post("/places/", auth, addPlace);
 router.get("/places/", auth, getPlaces);
 router.delete("/places/:id", auth, deletePlace);
 router.get("/places/search", auth, searchPlace);
-///----------------//////
 
-//places and reviews routes///
-router.get("/places/:id/reviews", auth, getReviewsByPlaceId);
-router.post("/places/:id/reviews", auth, createReviewForPlace);
-///----------------//////
-
-////reviews routes///
+/**
+ * Routes for revies create, get reviews for place, change, delete, find reviews by keyword, sort reviews
+ * @name POST/places/:placeId/reviews
+ * @name GET/places/:placeId/reviews
+ * @name PUT/reviews/:id
+ * @name DELETE/reviews/:id
+ * @name GET/reviews/search
+ * @name GET/reviews?
+ * @function
+ */
+router.get("/places/:placeId/reviews", auth, getReviewsByPlaceId);
+router.post("/places/:placeId/reviews", auth, createReviewForPlace);
 router.put("/reviews/:id", auth, updateReview);
 router.delete("/reviews/:id", auth, deleteReview);
-router.get("/reviews/search?keyword=someKeyword", auth, searchReviews);
-router.get("/reviews?sortBy=rating|date", auth, sortReviews);
-///----------------//////
+router.get("/reviews/search", auth, searchReviews);
+router.get("/reviews?", auth, sortReviews);
 
+/**
+ * Middleware to handle all other routes and return a "Page not found" error.
+ * @name all/*
+ * @function
+ */
 router.all("*", (req, res, next) => {
   next(new NotFound("Page not found"));
 });

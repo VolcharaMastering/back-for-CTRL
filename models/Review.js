@@ -27,5 +27,7 @@ const reviewSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+// Combined index for userId и placeId
+reviewSchema.indexes({ userId: 1, placeId: 1 }, { unique: true });
 
 export default mongoose.model('review', reviewSchema);

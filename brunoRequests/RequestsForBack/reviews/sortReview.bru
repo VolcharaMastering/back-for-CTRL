@@ -1,0 +1,19 @@
+meta {
+  name: sortReview
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:3000/reviews?sortBy=date
+  body: json
+  auth: bearer
+}
+
+query {
+  sortBy: date
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjk3ZTYzMjhhOTc2NWNhZDM3N2QiLCJpYXQiOjE3MTY1MDgzNzJ9.w19CviWjciF2miVU9iFvIqLI6HiujRUR8a1AqMh_yU8
+}

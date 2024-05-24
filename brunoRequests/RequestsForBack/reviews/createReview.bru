@@ -1,0 +1,22 @@
+meta {
+  name: createReview
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/places/664fb9426328a9765cad376f/reviews
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjk3ZTYzMjhhOTc2NWNhZDM3N2QiLCJpYXQiOjE3MTY1MDgzNzJ9.w19CviWjciF2miVU9iFvIqLI6HiujRUR8a1AqMh_yU8
+}
+
+body:json {
+  {
+  "rating": 1,
+  "comment": "No sweets"
+  }
+}
