@@ -1,0 +1,24 @@
+{
+    "plugins": ["plugins/markdown"],
+    "recurseDepth": 10,
+    "source": {
+        "include": [
+            "./app.js",
+            "./controllers/",
+            "./middlewares/",
+            "./routes/",
+            "./states/",
+            "./utils/"
+        ],
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "sourceType": "module",
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}

@@ -1,3 +1,8 @@
+/**
+* @module Middleware
+* @file Auth middleware. Middleware function to authenticate requests.
+* @exports auth
+*/
 import jwt from "jsonwebtoken";
 import AuthError from "../errors/authError.js";
 
