@@ -1,0 +1,19 @@
+meta {
+  name: searchPlace
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/places/search?query=some pla
+  body: json
+  auth: bearer
+}
+
+query {
+  query: some pla
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjhmZjYzMjhhOTc2NWNhZDM3NjIiLCJpYXQiOjE3MTY1MDA3NDF9.n2OdsGvQIuebnxnOX2OBAxyh8cQCFY037_j2p8RlTs8
+}

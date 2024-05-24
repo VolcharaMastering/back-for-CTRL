@@ -1,0 +1,15 @@
+meta {
+  name: deleteReview
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:3000/reviews/664fd71044a2f54e2b53d3d2
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjk3ZTYzMjhhOTc2NWNhZDM3N2QiLCJpYXQiOjE3MTY1MDgyOTF9.r-QNVNYQy-1U0BWg16xHxaXVwBES1FD0pERTCZVx4Q4
+}

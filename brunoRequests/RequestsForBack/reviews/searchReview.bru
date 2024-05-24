@@ -1,0 +1,19 @@
+meta {
+  name: searchReview
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/reviews/search?keyword=swee
+  body: json
+  auth: bearer
+}
+
+query {
+  keyword: swee
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjRmYjk3ZTYzMjhhOTc2NWNhZDM3N2QiLCJpYXQiOjE3MTY1MDgzNzJ9.w19CviWjciF2miVU9iFvIqLI6HiujRUR8a1AqMh_yU8
+}

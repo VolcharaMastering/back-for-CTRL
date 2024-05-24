@@ -2,8 +2,7 @@
   "name": "back",
   "version": "1.0.0",
   "description": "Test backend",
-  "main": "index.js",
-  
+  "main": "dist/app.js",
   "scripts": {
     "lint": "npx eslint .",
     "dev": "nodemon app.js",
@@ -11,9 +10,11 @@
     "format": "prettier --write **/*.{js,jsx,scss,css,json}"
   },
   "keywords": [],
-  "author": "",
+  "author": "vmstr",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "celebrate": "^15.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
