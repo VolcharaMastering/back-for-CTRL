@@ -46,5 +46,6 @@
 - Enter "pnpm install" in bash/shell/powershell commander,
 - Start project or run it in dev mode (npm start / npm run dev).
 - All request for API are saved in Bruno app folder "brunoRequests". Install bruno and import them. 
+- To explore code documentation enter "./out/" folder and start index.js file.  
 
 .env-file included, because it's a test backend server
