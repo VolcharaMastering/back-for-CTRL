@@ -1,13 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { errors } from 'celebrate';
-// import helmet from 'helmet';
+import helmet from 'helmet';
 import cors from 'cors';
 import { rateLimit } from 'express-rate-limit';
 import router from './routes/index.js';
 import errorHandler from './middlewares/errorHandler.js';
 import NotFound from './errors/notFound.js';
-
 import 'dotenv/config';
 
 const limiter = rateLimit({
@@ -18,21 +17,39 @@ const limiter = rateLimit({
 const { PORT = 3000, NODE_ENV, MONGO_URL } = process.env;
 const app = express();
 
+/** 
+ * @description Middleware to process requests using CORS. 
+ */ 
 app.use(cors());
+/** 
+ * @description creating of Express app. 
+ * @type {Object}
+ */ 
 app.use(express.json());
-// app.use(helmet());
-
+/** 
+ * @description Middleware to set security headers. 
+ */ 
+app.use(helmet());
+/** 
+ * @description Middleware to limit the number of requests. 
+ */ 
 app.use(limiter);
-
+/** 
+ * @description Middleware to process requests. 
+ */ 
 app.use(router);
-
+/** 
+ * @description Middleware to process requests for non-existent routes.
+ */ 
 app.use('*', (req, res, next) => {
   next(new NotFound('Page not found'));
 });
 
 app.use(errors());
 app.use(errorHandler);
-
+/** 
+ *  connect - connects to the database and starts the server. 
+ */ 
 async function connect() {
   await mongoose.connect(MONGO_URL, {});
 
