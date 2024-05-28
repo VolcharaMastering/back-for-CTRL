@@ -14,18 +14,18 @@
 *PATCH http://localhost:3000/users/me/ - Request to ubdate informatin about current user. Bearer token needed*  
 
 **administrate of places:**  
-*GET http://localhost:3000/places/ - Get request to get all places. Bearer token needed*  
+*GET http://localhost:3000/places/ - Get request to get all places*  
 *POST http://localhost:3000/places/ - Request to add new place with placeName, latitude and longitude in body. Bearer token needed*  
 *DELETE http://localhost:3000/places/:id/ - Delete request. Bearer token needed*    
-*GET http://localhost:3000/places/search?query=placeName/ - Get request to find all places by keyword "placeName". Bearer token needed*  
+*GET http://localhost:3000/places/search?query=placeName/ - Get request to find all places by keyword "placeName"*  
 
 **administrate of reviews:**  
-*GET http://localhost:3000/:placeId/reviews/ - Get request to get all reviews for place (placeId). Bearer token needed*  
+*GET http://localhost:3000/:placeId/reviews/ - Get request to get all reviews for place (placeId)*  
 *POST http://localhost:3000/:placeId/reviews/ - Request to add new review for place (placeId), with rating (1-5) and comment in body. Bearer token needed*    
 *PUT http://localhost:3000/reviews/:id/ - Request to update review for place (placeId), with rating (1-5) and comment in body. Bearer token needed*  
 *DELETE http://localhost:3000/reviews/:id/ - Delete request for review. Bearer token needed*    
-*GET http://localhost:3000/reviews/search?keyword=someKeyword/ - Get request to find all reviews by keyword "someKeyword". Bearer token needed*  
-*GET http://localhost:3000/reviews?sortBy=rating|date/ - Get request to sort all reviews by rating or date". Bearer token needed*  
+*GET http://localhost:3000/:placeId/reviews/search?keyword=someKeyword/ - Get request to find reviews of place by keyword "someKeyword"*  
+*GET http://localhost:3000/:placeId/reviews?sortBy=rating|date/ - Get request to sort reviews of place by rating or date" *  
 
 
 **Used:**   

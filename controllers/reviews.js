@@ -140,7 +140,6 @@ const deleteReview = async (req, res, next) => {
 const searchReviews = async (req, res, next) => {
   const { placeId } = req.params;
   const { keyword } = req.query;
-  console.log("placeId", placeId, "keyword", keyword);
   try {
     const reviews = await Review.find({
       placeId: placeId,
@@ -149,7 +148,6 @@ const searchReviews = async (req, res, next) => {
 
     res.status(OK_CODE).send(reviews);
   } catch (e) {
-    console.log(e);
     console.error(e);
     next(ServerError("Some bugs on server"));
   }
@@ -164,25 +162,27 @@ const searchReviews = async (req, res, next) => {
  * @throws {BadRequest} - If the sortBy parameter is invalid.
  */
 const sortReviews = async (req, res, next) => {
-  const { sortBy } = req.query;
-  console.log(sortBy, "sortBy");
+  const { placeId } = req.params;
+  const { sortBy, sortDirection } = req.query;
+
   try {
-    let sortField;
-    if (sortBy === "rating" || sortBy === "date") {
-      sortField = { [sortBy]: 1 };
-    } else {
+    if (sortBy !== "rating" && sortBy !== "date") {
       next(BadRequest("Invalid sortBy parameter"));
       return;
     }
-
-    const reviews = await Review.find({}).sort(sortField);
-    if (!reviews || reviews.length === 0) {
-      next(NotFound("No reviews found"));
-      return;
+    
+    const sortOrder = sortDirection === "desc" ? -1 : 1;
+    let sortField;
+    if (sortBy === "date") {
+      sortField = { timestamp: sortOrder };
+    } else {
+      sortField = { [sortBy]: sortOrder };
     }
-
+    
+    const reviews = await Review.find({ placeId }).sort(sortField);
     res.status(OK_CODE).send(reviews);
   } catch (e) {
+    console.error(e);
     next(ServerError("Some bugs on server"));
   }
 };

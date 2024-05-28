@@ -70,7 +70,7 @@ router.post("/places/:placeId/reviews", auth, createReviewForPlace);
 router.put("/reviews/:id", auth, updateReview);
 router.delete("/reviews/:id", auth, deleteReview);
 router.get("/:placeId/reviews/search", searchReviews);
-router.get("/reviews?", sortReviews);
+router.get("/:placeId/reviews", sortReviews);
 
 /**
  * Middleware to handle all other routes and return a "Page not found" error.

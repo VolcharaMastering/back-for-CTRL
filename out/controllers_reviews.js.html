@@ -190,7 +190,6 @@ const searchReviews = async (req, res, next) => {
  */
 const sortReviews = async (req, res, next) => {
   const { sortBy } = req.query;
-  console.log(sortBy, "sortBy");
   try {
     let sortField;
     if (sortBy === "rating" || sortBy === "date") {
