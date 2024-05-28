@@ -90,13 +90,13 @@ const aboutMe = async (req, res, next) => {
  * @throws {IncorrectData} - If there is a validation error with the user data.
  */
 const createUser = async (req, res, next) => {
-  const { email, password, name } = req.body;
+  const { email, password, username } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await new User({
       email,
       password: hashedPassword,
-      name,
+      username,
     }).save();
     res.status(CODE_CREATED).send({ data: user });
   } catch (e) {
@@ -120,8 +120,8 @@ const createUser = async (req, res, next) => {
  * @throws {IncorrectData} - Throws an IncorrectData error if the user's data is invalid.
  */
 const updateUser = (req, res, next) => {
-  const { email, name } = req.body;
-  User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
+  const { email, username } = req.body;
+  User.findByIdAndUpdate(req.user._id, { email, username }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         next(NotFound("No such user"));

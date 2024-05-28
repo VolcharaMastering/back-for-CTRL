@@ -12,6 +12,7 @@ import IncorrectData from "../errors/requestError.js";
 import ConflictError from "../errors/conflictError.js";
 import ServerError from "../errors/serverError.js";
 import { OK_CODE, CODE_CREATED } from "../states/states.js";
+import Review from "../models/Review.js";
 
 /**
  * @name addPlace. Adds a new place to the database.
@@ -24,12 +25,12 @@ import { OK_CODE, CODE_CREATED } from "../states/states.js";
  * @throws {ServerError} - If there is a server error.
  */
 const addPlace = async (req, res, next) => {
-  const { placeName, latitude, longitude } = req.body;
-  if (!placeName || !latitude || !longitude) {
+  const { placeName, lat, lng } = req.body;
+  if (!placeName || !lat || !lng) {
     return next(IncorrectData("Name, latitude and longitude are required"));
   }
   try {
-    const place = await Place.create({ placeName, latitude, longitude });
+    const place = await Place.create({ placeName, lat, lng });
     res.status(CODE_CREATED).send({ data: place });
   } catch (e) {
     if (e.code === 11000) {
@@ -77,6 +78,7 @@ const deletePlace = async (req, res, next) => {
       return;
     }
     const deletedPlace = await Place.findByIdAndDelete(id);
+    await Review.deleteMany({ placeId: id });
     if (!deletedPlace) {
       next(NotFound("No such place"));
       return;

@@ -1,13 +1,13 @@
 /**
-* @module Controllers
-* @file Rewiew controllers. Controllers for adding for place, getting, deleting, sorting and searching of reviews for places.
-* @exports getReviewsByPlaceId
-* @exports reateReviewForPlace
-* @exports updateReview
-* @exports deleteReview
-* @exports searchReviews
-* @exports sortReviews
-*/
+ * @module Controllers
+ * @file Rewiew controllers. Controllers for adding for place, getting, deleting, sorting and searching of reviews for places.
+ * @exports getReviewsByPlaceId
+ * @exports reateReviewForPlace
+ * @exports updateReview
+ * @exports deleteReview
+ * @exports searchReviews
+ * @exports sortReviews
+ */
 import Review from "../models/Review.js";
 import AuthError from "../errors/authError.js";
 import ConflictError from "../errors/conflictError.js";
@@ -138,16 +138,19 @@ const deleteReview = async (req, res, next) => {
  * @returns {Object|Function} - The array of reviews or the next function.
  */
 const searchReviews = async (req, res, next) => {
+  const { placeId } = req.params;
   const { keyword } = req.query;
+  console.log("placeId", placeId, "keyword", keyword);
   try {
-    const review = await Review.find({ comment: { $regex: keyword, $options: "i" } });
-    if (!review) {
-      next(NotFound("No such review"));
-      return;
-    }
-    res.status(OK_CODE).send(review);
+    const reviews = await Review.find({
+      placeId: placeId,
+      comment: { $regex: keyword, $options: "i" },
+    });
+
+    res.status(OK_CODE).send(reviews);
   } catch (e) {
     console.log(e);
+    console.error(e);
     next(ServerError("Some bugs on server"));
   }
 };

@@ -51,9 +51,9 @@ router.patch("/users/me", auth, validateUpdateUser, updateUser);
  * @function
  */
 router.post("/places/", auth, addPlace);
-router.get("/places/", auth, getPlaces);
+router.get("/places/", getPlaces);
 router.delete("/places/:id", auth, deletePlace);
-router.get("/places/search", auth, searchPlace);
+router.get("/places/search", searchPlace);
 
 /**
  * Routes for revies create, get reviews for place, change, delete, find reviews by keyword, sort reviews
@@ -65,12 +65,12 @@ router.get("/places/search", auth, searchPlace);
  * @name GET/reviews?
  * @function
  */
-router.get("/places/:placeId/reviews", auth, getReviewsByPlaceId);
+router.get("/places/:placeId/reviews", getReviewsByPlaceId);
 router.post("/places/:placeId/reviews", auth, createReviewForPlace);
 router.put("/reviews/:id", auth, updateReview);
 router.delete("/reviews/:id", auth, deleteReview);
-router.get("/reviews/search", auth, searchReviews);
-router.get("/reviews?", auth, sortReviews);
+router.get("/:placeId/reviews/search", searchReviews);
+router.get("/reviews?", sortReviews);
 
 /**
  * Middleware to handle all other routes and return a "Page not found" error.

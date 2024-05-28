@@ -8,11 +8,11 @@ const placeSchema = new mongoose.Schema({
     minlength: [2, 'Minimum 2 characters'],
     maxlength: [120, 'Maximum 120 characters'],
   },
-  latitude: {
+  lat: {
     type: Number,
     required: [true, 'Latitude is required'],
   },
-  longitude: {
+  lng: {
     type: Number,
     required: [true, 'Longitude is required'],
   },
