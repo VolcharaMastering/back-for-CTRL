@@ -51,11 +51,14 @@ app.use(errorHandler);
  *  connect - connects to the database and starts the server. 
  */ 
 async function connect() {
-  await mongoose.connect(MONGO_URL, {});
-
-  await app.listen(PORT, () => {
+  try{
+  await mongoose.connect(MONGO_URL);
+  app.listen(PORT, () => {
     console.log(`connected! on port ${PORT}`);
   });
+  }catch(err){
+    console.log(err);
+  }
 }
 
 connect();
