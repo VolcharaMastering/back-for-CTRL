@@ -23,6 +23,7 @@
     "helmet": "^7.1.0",
     "instal": "0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.6.2",
     "mongoose": "^8.4.0",
     "validator": "^13.12.0"
   },
