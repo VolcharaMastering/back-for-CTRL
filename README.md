@@ -3,6 +3,7 @@
 
 ##Link to [backend](https://back-for-ctrl.onrender.com)  
 ##Link to [frontend](https://front-for-ctrl.onrender.com/)  
+## ATTENTION! All parts of the project are hosted on free servers (Render.com). The first load of the frontend can take a lot of time. The first user request to the backend can take about 30-60 seconds. This problem is caused by "server sleeping." Free instances will spin down with inactivity, which can delay requests by 50 seconds or more.
 
 **Functionality:**  
  - CRUD of users,  
